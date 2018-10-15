@@ -2,6 +2,7 @@
 #define TIMESLOTMODEL_H
 
 #include <QAbstractListModel>
+#include "timeslotlist.h"
 
 class timeSlotModel : public QAbstractListModel
 {
@@ -21,10 +22,11 @@ public:
         LedModeRole,
         InverterLevelRole,
         FileBinPathRole,
-        LEDValuesListRole
+        LEDValuesListRole,
+        LEDChannelsRole,
+        ValveChannelsRole
 
-
-    }
+    };
 
     // Basic functionality:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -39,7 +41,12 @@ public:
 
     virtual QHash<int, QByteArray> roleNames() const override;
 
+    timeSlotList *list() const;
+    void setList(timeSlotList *list);
+
 private:
+
+    timeSlotList *mList;
 };
 
 #endif // TIMESLOTMODEL_H
